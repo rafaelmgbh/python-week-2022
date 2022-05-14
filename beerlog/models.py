@@ -20,7 +20,7 @@ class Beer(SQLModel, table=True):
     flavor: int
     image: int
     cost: int
-    rate: int =0
+    rate: int = 0
     date: datetime = Field(default_factory=datetime.now)
 
     @validator("flavor", "image", "cost")
@@ -33,6 +33,7 @@ class Beer(SQLModel, table=True):
     def calculate_rate(cls, v, values):
         rate = mean([values["flavor"], values["image"], values["cost"]])
         return int(rate)
+
 
 try:
     brewdog = Beer(name="BewDog", style="NEIPA", flavor=6, image=8, cost=10)
